@@ -1,0 +1,15 @@
+{
+  "name": "keener-api",
+  "version": "1.0.0",
+  "description": "Api para estoque Keener",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "node"
+  ],
+  "author": "Raphael Americano <raphael@raphaelamericano.com.br> (http://www.raphaelamericano.com.br/)",
+  "license": "ISC"
+}
