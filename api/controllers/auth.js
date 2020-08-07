@@ -6,6 +6,12 @@ const router = express.Router();
 const database = require('../database/database');
 const usuarios = require('../models/usuarios');
 
+const gerarToken = (parametros) => {
+    return jwt.sign( parametros ,  authConfig.secret, {
+        expiresIn: 86400
+    } )
+}
+
 router.get('/usuarios', async (req, res ) => {
     try {
         let retorno = undefined;
@@ -44,9 +50,11 @@ router.post('/register', async (req, res) => {
         ).catch (
             error => console.warn('Error:', error)
         )
+        
         return res.status(201).send({ 
-            "usuario": usuario,
-            "retorno": retorno
+            usuario: usuario,
+            retorno: retorno,
+            token: gerarToken({ id: retorno.resultado.insertId })
         });
     } catch (err){
         return res.status(400).send({ error: 'Falha no registro' })
@@ -68,14 +76,9 @@ router.post('/authenticate', async (req, res ) => {
     } 
     // verifica a senha encryptada
     if(!await bscrypt.compare(password, user.senha )) return res.status(400).send({ error: 'Password invalido'});
-
     user.senha = undefined;
-    const token = jwt.sign( { id: user.id_usuario } ,  authConfig.secret, {
-        expiresIn: 86400
-    } );
-    
-    res.status(200).send({ user, token } );
-
-})
+    // const token = gerarToken({ id: user.id_usuario });
+    res.status(200).send({ user, token: gerarToken({ id: user.id_usuario })  } );
+});
 
 module.exports = app => app.use('/auth', router);
