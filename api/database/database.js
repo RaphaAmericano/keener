@@ -36,11 +36,11 @@ const createTable = (conn) => {
         nome VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
         senha VARCHAR(255) NOT NULL
-    ) 
+    ); 
     CREATE TABLE IF NOT EXISTS PRODUTO(
         id_produto INT PRIMARY KEY AUTO_INCREMENT,
         quantidade INT DEFAULT 0 NOT NULL
-    )
+    );
     CREATE TABLE IF NOT EXISTS MOVIMENTACOES(
         id_movimentacao INT PRIMARY KEY AUTO_INCREMENT,
         id_produto INT,
@@ -48,8 +48,7 @@ const createTable = (conn) => {
         tipo BOOLEAN,
         horario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY(id_produto) REFERENCES PRODUTO(id_produto)
-    )`
-
+    );`
     conn.query(db, (err, results, fields) => {
         if(err) return console.log(err);
         console.log("Database criada");

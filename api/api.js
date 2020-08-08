@@ -6,8 +6,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-require('./controllers/auth')(app)
-
+require('./controllers/auth')(app);
+require('./controllers/produtosController')(app);
 
 app.get('/', (req, res) => {
     res.send('OK')
