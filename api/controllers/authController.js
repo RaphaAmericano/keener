@@ -1,6 +1,8 @@
 const express = require('express');
 const bscrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+
 const authConfig = require('../config/auth');
 const router = express.Router();
 const database = require('../database/database');
@@ -76,9 +78,32 @@ router.post('/authenticate', async (req, res ) => {
     } 
     // verifica a senha encryptada
     if(!await bscrypt.compare(password, user.senha )) return res.status(400).send({ error: 'Password invalido'});
+    // limpa a senha do objeto para retornar
     user.senha = undefined;
-    // const token = gerarToken({ id: user.id_usuario });
+    //
     res.status(200).send({ user, token: gerarToken({ id: user.id_usuario })  } );
 });
+
+router.post('/forgot_password', async (req, res) => {
+    const { email } = req.body;
+    let user = undefined;
+   
+    try {
+        // buscar o usuario pelo email
+        await usuarios.selectUsuarioEmail(email).then(
+            resultado => user = resultado.resultado[0]
+        ).catch(
+            error => res.status(400).send({ error: 'Usuário não encontrado'})
+        );
+        
+        const token = crypto.randomBytes(20).toString('hex');
+        const agora = new Date();
+        agora.setHours(agora.getHours() + 1 );
+
+    } catch (error) {
+        res.status(400).send({ error: 'Erro ao buscar password esquecido, tente novament'})
+    }
+
+})
 
 module.exports = app => app.use('/auth', router);
