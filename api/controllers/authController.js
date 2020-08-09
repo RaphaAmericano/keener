@@ -91,17 +91,26 @@ router.post('/forgot_password', async (req, res) => {
     try {
         // buscar o usuario pelo email
         await usuarios.selectUsuarioEmail(email).then(
-            resultado => user = resultado.resultado[0]
+            resultado => {
+                user = resultado.resultado[0]
+            }
         ).catch(
             error => res.status(400).send({ error: 'Usuário não encontrado'})
         );
         
-        const token = crypto.randomBytes(20).toString('hex');
-        const agora = new Date();
+        const token = await crypto.randomBytes(20).toString('hex');
+        let agora = new Date();
         agora.setHours(agora.getHours() + 1 );
-
+        //agora = agora.toISOString().slice(0, 19).replace('T', ' ');
+            console.log('token',token)
+        await usuarios.updateUsuarioToken(token, agora, user.id_usuario ).then(
+            resultado => console.log('resultado:', resultado)
+        ).catch(
+            err => console.log(err)
+        )
+       
     } catch (error) {
-        res.status(400).send({ error: 'Erro ao buscar password esquecido, tente novament'})
+        res.status(400).send({ error: 'Erro ao buscar password esquecido, tente novamente'})
     }
 
 })

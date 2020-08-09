@@ -11,7 +11,7 @@ const selectProdutoId = (id) => {
 }
 
 const selectProdutosNome = (nomeStr) => {
-    const sql = `SELECT * FROM PRODUTO WHERE nome = ?`;
+    const sql = `SELECT * FROM PRODUTO WHERE nome LIKE ?`;
     return database.exeSqlQuery(sql, [nomeStr]);
 }
 
