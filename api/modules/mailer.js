@@ -9,10 +9,14 @@ const transport = nodemailer.createTransport({
     auth: { user, pass }
 });
 
-// transport.use('compile', hbs({
-//     viewEngine: 'express-handlebars',
-//     viewPath: path.resolve(__dirname, '../mail/'),
-//     extName: '.html'
-// }));
+transport.use('compile', hbs({
+    viewEngine: {
+        extName: '.handlebars',
+        partialsDir: path.join(__dirname, '../mail/'),
+        layoutsDir: path.join(__dirname, '../mail/'),
+        defaultLayout: false
+    },
+    viewPath: path.join(__dirname, '../mail/')
+}));
 
 module.exports = transport;

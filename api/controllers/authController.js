@@ -34,12 +34,16 @@ router.post('/register', async (req, res) => {
     // verifica a existencia de emails ja cadastrados        
     try {
         usuarios.selectUsuarioEmail(usuario.email).then(
-            resultado => console.log(resultado)
+            resultado => {
+                if(resultado.resultado.length > 0){
+                    return res.status(400).send({ error: 'Email já cadastrado'})            
+                }
+            }
         ).catch(
             error => console.warn('Error:', error)
         );
     } catch(err) {
-        return res.status(400).send({ error: 'Email já cadastrado'})
+        return res.status(400).send({ error: 'Ocorreu um erro ao registrar o usuário. Tente novamente.'})
     } 
     // executa a insert no banco
     try {
@@ -102,30 +106,28 @@ router.post('/forgot_password', async (req, res) => {
         const token = await crypto.randomBytes(20).toString('hex');
         let agora = new Date();
         agora.setHours(agora.getHours() + 1 );
-        //agora = agora.toISOString().slice(0, 19).replace('T', ' ');
+        // agora = agora.toISOString().slice(0, 19).replace('T', ' ');
         
+        //Funcao para preencher e disparar o email com o token para renovacao de senha
         await usuarios.updateUsuarioToken(token, agora, user.id_usuario ).then(
             resultado => {
                 mailer.sendMail({
                     to: email,
                     from: 'raphael@raphaelamericano.com.br',
                     subject: 'Testando o token',
-                    text: `Apenas um texte do envio do token: ${token}`
-                    // template:'forgot_password',
-                    // context: { token }
+                    template:'forgot_password',
+                    context: { token }
                 },(err, resultados) => {
                     if(err)
-                     {  
-                         console.warn("erro:", err);
+                    {  
                         return res.status(400).send({ error: 'Não foi possivel enviar o email de recuperação de senha'})
                     };
-                    return res.status(200).send();
+                    return res.status(200).send({ mensagem: `Email de recuperação de senha enviado para ${resultados.envelope.to[0]} com sucesso`});
                 })
             }
         ).catch(
             err => console.log(err)
         )
-       
     } catch (error) {
         res.status(400).send({ error: 'Erro ao buscar password esquecido, tente novamente'})
     }
