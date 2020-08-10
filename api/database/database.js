@@ -10,7 +10,7 @@ const connectionHost = {
 const connection = mysql.createPool(connectionHost);
 
 const exeSqlQuery = (sql, valores = []) => {
-    console.log('valoers:', valores);
+    
     return new Promise((resolve, reject) => {
         connection.getConnection((error, conn) => {
             if(error){ 

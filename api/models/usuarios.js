@@ -16,9 +16,13 @@ const insertUsuario = (usuario) => {
 }
 
 const updateUsuarioToken = (token, expires, usuario) => {
-    console.log( token, expires, usuario)
     const sql = `UPDATE USUARIO SET token = ?, token_expires = ? WHERE id_usuario = ?`;
     return database.exeSqlQuery(sql, [token, expires, usuario]);
 }
 
-module.exports = { selectAllUsuarios, insertUsuario, selectUsuarioEmail, updateUsuarioToken }
+const updateSenha = (password, id) => {
+    const sql = `UPDATE USUARIO SET senha = ? WHERE id_usuario = ?`;
+    return database.exeSqlQuery(sql, [password, id]);
+}
+
+module.exports = { selectAllUsuarios, insertUsuario, selectUsuarioEmail, updateUsuarioToken, updateSenha }

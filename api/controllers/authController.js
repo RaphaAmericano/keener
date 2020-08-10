@@ -2,6 +2,7 @@ const express = require('express');
 const bscrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const mailer = require('../modules/mailer');
 
 const authConfig = require('../config/auth');
 const router = express.Router();
@@ -102,15 +103,69 @@ router.post('/forgot_password', async (req, res) => {
         let agora = new Date();
         agora.setHours(agora.getHours() + 1 );
         //agora = agora.toISOString().slice(0, 19).replace('T', ' ');
-            console.log('token',token)
+        
         await usuarios.updateUsuarioToken(token, agora, user.id_usuario ).then(
-            resultado => console.log('resultado:', resultado)
+            resultado => {
+                mailer.sendMail({
+                    to: email,
+                    from: 'raphael@raphaelamericano.com.br',
+                    template:'forgot_password',
+                    context: { token }
+                },(err, resultados) => {
+                    if(err)
+                     {  
+                         console.warn("erro:", err);
+                        return res.status(400).send({ error: 'Não foi possivel enviar o email de recuperação de senha'})
+                    };
+                    return res.status(200).send();
+                })
+            }
         ).catch(
             err => console.log(err)
         )
        
     } catch (error) {
         res.status(400).send({ error: 'Erro ao buscar password esquecido, tente novamente'})
+    }
+});
+
+router.post('/reset_password', async (req, res) => {
+    const { email, token, senha } = req.body;
+    let user = undefined;
+    try {
+        //Busca o usuario pelo email
+        await usuarios.selectUsuarioEmail(email).then(
+            resultado => user = resultado.resultado[0]
+        ).catch(
+            error => {
+                console.warn('Error: ', error);
+                return res.status(400).send({ error: 'Usuário não encontrado' })
+            }
+        )
+        // TODO: fazer um try catch para cada promise 
+        //verifica o se o token é valido
+        if(token !== user.token){
+            return res.status(400).send({ error: 'Token invalido'})
+        }
+        // Verifica se o token expirou
+        const agora = new Date();
+        if(agora > user.token_expires){
+            return res.status(400).send({ error: 'Token expirou'})
+        }
+        // encrypta a nova senha
+        const hash = await bscrypt.hash(senha, 10 );
+        // faz o update da nova senha no banco
+        await usuarios.updateSenha(hash, user.id_usuario).then(
+            resultado => {
+                return res.status(200).send({ mensagem: 'Senha alterada com sucesso'}) 
+            }
+        ).catch(
+            error => console.log('Error: ', error)
+        )
+        
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({error: 'Não foi possível alterar sua senha. Tente novamente'})
     }
 
 })
