@@ -27,7 +27,6 @@ router.post('/register', async (req, res) => {
     try {
         await produtos.insertProduto(nome).then(
             retorno => {
-                console.log(retorno);
                 return res.status(201).send({ mensagem: `${nome} foi registrado com sucesso.`})
             }
         ).catch(
