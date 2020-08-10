@@ -26,7 +26,7 @@ const updateProduto = (nome, quantidade, id) => {
 }
 
 const updateQuantidadeProduto = ( quantidade, id) => {
-    const sql = `UPDATE PRODUTO SET quantidade = ? WHERE id_produto = ?`;
+    const sql = `UPDATE PRODUTO SET quantidade = quantidade + ? WHERE id_produto = ?`;
     return database.exeSqlQuery(sql, [quantidade, id]);
 }
 

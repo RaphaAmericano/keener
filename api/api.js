@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 require('./controllers/authController')(app);
 require('./controllers/produtosController')(app);
+require('./controllers/movimentacoesController')(app);
 
 app.get('/', (req, res) => {
     res.send('OK')
