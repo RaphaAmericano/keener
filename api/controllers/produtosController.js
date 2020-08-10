@@ -39,6 +39,47 @@ router.post('/register', async (req, res) => {
     } catch (error) {
         return res.status(400).send({ error: 'Ocorreu um erro ao registrar o produto'})
     }
+});
+
+router.patch('/editar/:id', async (req, res) => {
+    const { nome, quantidade } = req.body;
+    const id = req.params.id;
+    try {
+        await produtos.updateProduto(nome, quantidade, id).then(
+            resultado => res.status(200).send({ resultado: resultado })
+        ).catch(
+            error => res.status(400).send({ erro: error, mensagem: 'Não foi possível atualizar o produto'})
+        )
+    } catch (error) {
+        return res.status(400).send({ erro: 'Ocorreu um erro ao tentar atualizar o produto'})
+    }
+});
+
+router.put('/quantidade/:id', async (req, res) => {
+    const {  quantidade } = req.body;
+    const id = req.params.id;
+    try {
+        await produtos.updateQuantidadeProduto( quantidade, id).then(
+            resultado => res.status(200).send({ resultado: resultado })
+        ).catch(
+            error => res.status(400).send({ erro: error, mensagem: 'Não foi possível atualizar a quantidade do produto'})
+        )
+    } catch (error) {
+        return res.status(400).send({ erro: 'Ocorreu um erro ao tentar atualizar o produto'})
+    }
+});
+
+router.delete('/delete/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        await produtos.deleteProduto(id).then(
+            resultado => res.status(200).send({ mensagem: `O produto de id ${id} foi excluído com sucesso`})
+        ).catch(
+            error => res.status(400).send({ error: `Ocorreu um erro ao tentar excluir o produto de id ${id}` })
+        )
+    }catch(error) {
+        return res.status(400).send({ erro: 'Ocorreu um erro ao tentar excluir o produto' })
+    }
 })
 
 module.exports = app => app.use('/produtos', router);
