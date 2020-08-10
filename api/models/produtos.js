@@ -15,4 +15,9 @@ const selectProdutosNome = (nomeStr) => {
     return database.exeSqlQuery(sql, [nomeStr]);
 }
 
-module.exports = { selectAllProdutos, selectProdutoId, selectProdutosNome };
+const insertProduto = (nome) => {
+    const sql = `INSERT INTO PRODUTO(nome) VALUES(?)`;
+    return database.exeSqlQuery(sql, [nome]);
+}
+
+module.exports = { selectAllProdutos, selectProdutoId, selectProdutosNome, insertProduto };
