@@ -1,0 +1,72 @@
+<mat-card>
+    <img mat-card-image src="../../assets/keener_logo.png" alt="Logo Keener">
+    <mat-card-header>
+        <mat-card-title>Cadastro</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-grid-list cols="2" rowHeight="6rem">
+            <form 
+            (ngSubmit)="cadastrar()"
+            [formGroup]="formulario">
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nome</mat-label>
+                        <input 
+                            matInput 
+                            autocomplete="name"
+                            type="text"
+                            formControlName="nome"
+                            placeholder="Nome">
+                        <mat-icon matSuffix>perm_identity</mat-icon>
+                        <mat-hint>Preencha seu nome</mat-hint>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input 
+                        matInput 
+                        autocomplete="email"
+                        formControlName="email"
+                        placeholder="Email">
+                        <mat-icon matSuffix>email</mat-icon>
+                        <mat-hint>Preencha seu email</mat-hint>
+                    </mat-form-field>
+                </mat-grid-tile>
+                
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Senha</mat-label>
+                        <input 
+                            matInput 
+                            [type]="visibilidadeSenha ? 'password': 'text' "
+                            formControlName="senha"
+                            placeholder="Senha">
+                        <mat-icon matSuffix (click)="visibilidadeSenha = !visibilidadeSenha" >{{ visibilidadeSenha ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        <mat-hint>Preencha sua senha</mat-hint>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Confirmar Senha</mat-label>
+                        <input 
+                            matInput 
+                            [type]="visibilidadeConfirmaSenha ? 'password': 'text' "
+                            formControlName="senha"
+                            placeholder="Senha">
+                        <mat-icon matSuffix (click)="visibilidadeConfirmaSenha = !visibilidadeConfirmaSenha" >{{ visibilidadeConfirmaSenha ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        <mat-hint>Preencha sua senha</mat-hint>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="2" rowspan="1">
+                    <mat-card-actions>
+                        <button mat-button type="submit" color="primary">Cadastrar</button>
+                    </mat-card-actions>
+                </mat-grid-tile>
+                </form>
+            </mat-grid-list>
+    </mat-card-content>
+</mat-card>

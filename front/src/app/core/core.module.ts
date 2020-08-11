@@ -3,6 +3,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 
+
 @NgModule({
   declarations: [],
   imports: [
@@ -10,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
     StoreModule.forRoot({}, {})
   ],
   providers:[
+    // Desenvolver um interceptor para 
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ]
 })

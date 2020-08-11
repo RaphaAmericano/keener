@@ -114,7 +114,7 @@ router.post('/forgot_password', async (req, res) => {
                 mailer.sendMail({
                     to: email,
                     from: 'raphael@raphaelamericano.com.br',
-                    subject: 'Testando o token',
+                    subject: 'Alteração de senha',
                     template:'forgot_password',
                     context: { token }
                 },(err, resultados) => {
