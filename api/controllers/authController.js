@@ -31,22 +31,25 @@ router.get('/usuarios', async (req, res ) => {
 
 router.post('/register', async (req, res) => {
     const usuario = req.body;
+    console.log(usuario);
     // verifica a existencia de emails ja cadastrados        
     try {
-        usuarios.selectUsuarioEmail(usuario.email).then(
+        await usuarios.selectUsuarioEmail(usuario.email).then(
             resultado => {
                 if(resultado.resultado.length > 0){
-                    return res.status(400).send({ error: 'Email já cadastrado'})            
+                    throw new Error( 'Email já cadastrado');
                 }
             }
         ).catch(
-            error => console.warn('Error:', error)
+            error => {
+                throw error;
+            }
         );
     } catch(err) {
-        return res.status(400).send({ error: 'Ocorreu um erro ao registrar o usuário. Tente novamente.'})
+        return res.status(400).send({ error: `Ocorreu um erro ao registrar o usuário. Tente novamente.`, tipo: err.message })
     } 
     // executa a insert no banco
-    try {
+    try {        
         //encrypta o password e atribui ao objeto
         const hash = await bscrypt.hash(usuario.password, 10 );
         usuario.password = hash;
@@ -55,7 +58,10 @@ router.post('/register', async (req, res) => {
         await usuarios.insertUsuario(usuario).then(
             resultado => retorno = resultado
         ).catch (
-            error => console.warn('Error:', error)
+            error => {
+                console.warn('Error:', error);
+                throw new Error({ error });
+            }
         )
         
         return res.status(201).send({ 

@@ -37,27 +37,27 @@
                 
                 <mat-grid-tile colspan="1" rowspan="1">
                     <mat-form-field appearance="fill">
-                        <mat-label>Senha</mat-label>
+                        <mat-label>Password</mat-label>
                         <input 
                             matInput 
-                            [type]="visibilidadeSenha ? 'password': 'text' "
-                            formControlName="senha"
-                            placeholder="Senha">
-                        <mat-icon matSuffix (click)="visibilidadeSenha = !visibilidadeSenha" >{{ visibilidadeSenha ? 'visibility' : 'visibility_off'}}</mat-icon>
-                        <mat-hint>Preencha sua senha</mat-hint>
+                            [type]="visibilidadePassword ? 'password': 'text' "
+                            formControlName="password"
+                            placeholder="Password">
+                        <mat-icon matSuffix (click)="visibilidadePassword = !visibilidadePassword" >{{ visibilidadePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        <mat-hint>Preencha seu password</mat-hint>
                     </mat-form-field>
                 </mat-grid-tile>
 
                 <mat-grid-tile colspan="1" rowspan="1">
                     <mat-form-field appearance="fill">
-                        <mat-label>Confirmar Senha</mat-label>
+                        <mat-label>Confirmar Password</mat-label>
                         <input 
                             matInput 
-                            [type]="visibilidadeConfirmaSenha ? 'password': 'text' "
-                            formControlName="confirma_senha"
-                            placeholder="Senha">
-                        <mat-icon matSuffix (click)="visibilidadeConfirmaSenha = !visibilidadeConfirmaSenha" >{{ visibilidadeConfirmaSenha ? 'visibility' : 'visibility_off'}}</mat-icon>
-                        <mat-hint>Preencha sua senha</mat-hint>
+                            [type]="visibilidadeConfirmaPassword ? 'password': 'text' "
+                            formControlName="confirma_password"
+                            placeholder="Password">
+                        <mat-icon matSuffix (click)="visibilidadeConfirmaPassword = !visibilidadeConfirmaPassword" >{{ visibilidadeConfirmaPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        <mat-hint>Preencha seu password novamente</mat-hint>
                     </mat-form-field>
                 </mat-grid-tile>
 

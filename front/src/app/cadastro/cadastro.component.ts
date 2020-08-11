@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatFormFieldControl } from '@angular/material/form-field';
-import { FormularioUsuario } from '../shared/models/formulario.usuario';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpService } from '../core/services/http.service';
+import { UsuarioService } from '../core/services/usuario.service';
+import { Usuario } from '../shared/models/usuario';
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
@@ -11,23 +11,32 @@ import { HttpService } from '../core/services/http.service';
 // export class CadastroComponent implements OnInit, MatFormFieldControl<FormularioUsuario> {
 export class CadastroComponent implements OnInit {
 
-  modelUsuario:FormularioUsuario = new FormularioUsuario();
+  usuario:Usuario = new Usuario();
   formulario: FormGroup;
-  visibilidadeSenha:boolean = true;
-  visibilidadeConfirmaSenha:boolean = true;
-  constructor(private formBuider: FormBuilder, private httpService:HttpService) {}
+  visibilidadePassword:boolean = true;
+  visibilidadeConfirmaPassword:boolean = true;
+  constructor(private formBuider: FormBuilder, private usuarioService:UsuarioService) {}
 
   ngOnInit(): void {
     this.formulario = this.formBuider.group({
       nome:['', [Validators.required, Validators.minLength(3)]],
       email:['', [Validators.required, Validators.email]],
-      senha:['', [Validators.required, Validators.minLength(3)]],
-      confirma_senha:['', [Validators.required, Validators.minLength(3)]]
+      password:['', [Validators.required, Validators.minLength(3)]],
+      confirma_password:['', [Validators.required, Validators.minLength(3)]]
     })
   }
 
   public cadastrar(): void {
-    console.log(this.formulario);
+    if(this.formulario.valid){
+    this.usuario.email = this.formulario.value.email;
+    this.usuario.name = this.formulario.value.nome;
+    this.usuario.password = this.formulario.value.password;
+    
+    this.usuarioService.cadastrarUsuario(this.usuario).subscribe(
+      res => console.log(res)
+      )
+    }
+    
   }
 
 }
