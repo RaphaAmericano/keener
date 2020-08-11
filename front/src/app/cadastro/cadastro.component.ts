@@ -28,9 +28,6 @@ export class CadastroComponent implements OnInit {
 
   public cadastrar(): void {
     console.log(this.formulario);
-    this.httpService.buscarTodosUsuarios().subscribe(
-      res => console.log(res)
-    );
   }
 
 }

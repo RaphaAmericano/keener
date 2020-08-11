@@ -11,9 +11,7 @@ export class HttpService {
 
   private readonly API = environment.API;
 
-  constructor(private http:HttpClient) {
-    console.log(`${this.API}auth/usuarios`);
-  }
+  constructor(private http:HttpClient) {}
 
   public buscarTodosUsuarios(): Observable<any> {
     return this.http.get(`${this.API}auth/usuarios`).pipe(

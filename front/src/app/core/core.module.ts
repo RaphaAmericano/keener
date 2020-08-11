@@ -3,6 +3,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { HttpService } from './services/http.service';
+import { HeaderInterceptor} from './interceptors/header.interceptor';
 @NgModule({
   declarations: [],
   imports: [
@@ -10,9 +11,9 @@ import { HttpService } from './services/http.service';
     HttpClientModule
   ],
   providers:[
-    HttpService
+    HttpService,
     // Desenvolver um interceptor para 
-    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
   ]
 })
 export class CoreModule {
