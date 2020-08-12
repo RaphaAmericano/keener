@@ -3,6 +3,7 @@ import { Usuario } from '../shared/models/usuario';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../core/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder:FormBuilder, 
     private authService:AuthService,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
@@ -38,6 +40,7 @@ export class LoginComponent implements OnInit {
         err => {
           this.abrirSnackBar(err.mensagem.error);
         },
+        // () => this.router.navigate(['/produtos/lista'])
         () => console.log('callback')
       )
     }
