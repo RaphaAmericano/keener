@@ -33,15 +33,15 @@ export class LoginComponent implements OnInit {
       this.authService.requisicaoAuth(this.usuario).subscribe(
         res => console.log(res),
         err => {
-          console.warn(err);
-          this.abrirSnackBar();
+          console.warn(err.mensagem.error);
+          this.abrirSnackBar(err.mensagem.error);
         },
         () => console.log('callback')
       )
     }
   }
-  public abrirSnackBar(): void {
-    this._snackBar.open("Erro ao logar", "Tente novamente", {
+  public abrirSnackBar(mensagem): void {
+    this._snackBar.open(`Erro ao logar: ${mensagem}`, "Tente novamente", {
       duration:4000
     })
   }
