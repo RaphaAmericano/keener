@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module'; 
 import { StoreModule } from '@ngrx/store';
 import { LoginComponent } from './login/login.component';
+import { ProdutoComponent } from './produto/produto.component';
 @NgModule({
   declarations: [
     AppComponent

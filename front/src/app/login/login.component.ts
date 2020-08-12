@@ -40,8 +40,8 @@ export class LoginComponent implements OnInit {
         err => {
           this.abrirSnackBar(err.mensagem.error);
         },
-        // () => this.router.navigate(['/produtos/lista'])
-        () => console.log('callback')
+        () => this.router.navigate(['/produto'])
+        // () => console.log('callback')
       )
     }
   }

@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren: () => import('./cadastro/cadastro.module').then(module => module.CadastroModule)
   },
   {
+    path:'produto',
+    loadChildren: () => import('./produto/produto.module').then(module => module.ProdutoModule)
+  },
+  {
     path:'',
     redirectTo:'login',
     pathMatch:'full'
