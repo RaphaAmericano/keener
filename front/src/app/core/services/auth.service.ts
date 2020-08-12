@@ -18,9 +18,12 @@ export class AuthService {
       )
   }
 
-
   public guardarLocalStorage(res): void {
     localStorage.setItem('usuario', JSON.stringify(res));
+  }
+
+  public getStorage() {
+    return JSON.parse(localStorage.getItem('usuario'))
   }
 
   private handleError(err){

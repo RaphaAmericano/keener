@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { ProdutoService } from 'src/app/core/services/produto.service';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 const DATA: object[] = [
   { id_produto: 1, quantidade: 2, nome: 'Pasta de dente' },
@@ -14,13 +17,17 @@ const DATA: object[] = [
 })
 export class ProdutoListaComponent implements OnInit {
 
-  produtos: object[] = DATA;
+  produtos: object[];
   source = new MatTableDataSource(this.produtos);
   colunas: string[] = ['nome', 'quantidade'];
-  constructor() { }
+  constructor(private produtoService:ProdutoService) { }
 
   ngOnInit(): void {
-    console.log(this.produtos);
+    this.produtoService.buscarTodosProdutos().subscribe(
+      res => this.produtos = res.produtos.resultado,
+      error => console.error(error),
+      () => this.source.data = this.produtos
+    )
   }
 
 }
