@@ -1,6 +1,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UsuarioService } from './services/usuario.service';
+import { AuthService } from './services/auth.service';
 import { HeaderInterceptor} from './interceptors/header.interceptor';
 import { CustomValidatorsService } from './services/custom.validators.service';
 
@@ -11,6 +12,7 @@ import { CustomValidatorsService } from './services/custom.validators.service';
   ],
   providers:[
     UsuarioService,
+    AuthService,
     CustomValidatorsService,
     { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
   ]

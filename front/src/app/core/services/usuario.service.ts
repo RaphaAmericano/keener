@@ -27,8 +27,8 @@ export class UsuarioService {
   }
 
   private handleError(err){
-    let mensagemErro = { mensagem: err }
-    return throwError(mensagemErro)
+    let mensagemErro = { mensagem: err };
+    return throwError(mensagemErro);
   }
 
 }
