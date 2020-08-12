@@ -18,6 +18,11 @@ export class AuthService {
       )
   }
 
+
+  public guardarLocalStorage(res): void {
+    localStorage.setItem('usuario', JSON.stringify(res));
+  }
+
   private handleError(err){
     let mensagemErro = { mensagem: err };
     return throwError(mensagemErro);

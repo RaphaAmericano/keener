@@ -31,9 +31,11 @@ export class LoginComponent implements OnInit {
       this.usuario.email = this.formulario.value.email;
       this.usuario.password = this.formulario.value.password;
       this.authService.requisicaoAuth(this.usuario).subscribe(
-        res => console.log(res),
+        res => {
+          console.log(res);
+          this.authService.guardarLocalStorage(res);
+        },
         err => {
-          console.warn(err.mensagem.error);
           this.abrirSnackBar(err.mensagem.error);
         },
         () => console.log('callback')
