@@ -18,7 +18,8 @@
                             formControlName="nome"
                             placeholder="Nome">
                         <mat-icon matSuffix>perm_identity</mat-icon>
-                        <mat-hint>Preencha seu nome</mat-hint>
+                        <mat-hint *ngIf="formulario.get('nome').invalid && formulario.get('nome').dirty">Nome inválido</mat-hint>
+                        <mat-hint *ngIf="formulario.get('nome').touched && !formulario.get('nome').dirty">Preencha seu nome</mat-hint>
                     </mat-form-field>
                 </mat-grid-tile>
 
@@ -31,35 +32,43 @@
                         formControlName="email"
                         placeholder="Email">
                         <mat-icon matSuffix>email</mat-icon>
-                        <mat-hint>Preencha seu email</mat-hint>
-                    </mat-form-field>
-                </mat-grid-tile>
-                
-                <mat-grid-tile colspan="1" rowspan="1">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Password</mat-label>
-                        <input 
-                            matInput 
-                            [type]="visibilidadePassword ? 'password': 'text' "
-                            formControlName="password"
-                            placeholder="Password">
-                        <mat-icon matSuffix (click)="visibilidadePassword = !visibilidadePassword" >{{ visibilidadePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
-                        <mat-hint>Preencha seu password</mat-hint>
+                        <mat-hint *ngIf="formulario.get('email').invalid && formulario.get('email').dirty">Email inválido</mat-hint>
+                        <mat-hint *ngIf="formulario.get('email').touched && !formulario.get('email').dirty">Preencha seu email</mat-hint>
                     </mat-form-field>
                 </mat-grid-tile>
 
-                <mat-grid-tile colspan="1" rowspan="1">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Confirmar Password</mat-label>
-                        <input 
-                            matInput 
-                            [type]="visibilidadeConfirmaPassword ? 'password': 'text' "
-                            formControlName="confirma_password"
-                            placeholder="Password">
-                        <mat-icon matSuffix (click)="visibilidadeConfirmaPassword = !visibilidadeConfirmaPassword" >{{ visibilidadeConfirmaPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
-                        <mat-hint>Preencha seu password novamente</mat-hint>
-                    </mat-form-field>
-                </mat-grid-tile>
+                <div formGroupName="passwordGroup">
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Password</mat-label>
+                            <input 
+                                matInput 
+                                [type]="visibilidadePassword ? 'password': 'text' "
+                                formControlName="password"
+                                placeholder="Password">
+                            <mat-icon matSuffix (click)="visibilidadePassword = !visibilidadePassword" >{{ visibilidadePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+                            <mat-hint *ngIf="formulario.get('passwordGroup.password').invalid && formulario.get('passwordGroup.password').dirty">Password inválido</mat-hint>
+                            <mat-hint *ngIf="formulario.get('passwordGroup.password').touched && !formulario.get('passwordGroup.password').dirty">Preencha seu password</mat-hint>
+                        </mat-form-field>
+                    </mat-grid-tile>
+    
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Confirmar Password</mat-label>
+                            <input 
+                                matInput 
+                                [type]="visibilidadeConfirmaPassword ? 'password': 'text' "
+                                formControlName="confirma_password"
+                                placeholder="Password">
+                            <mat-icon matSuffix (click)="visibilidadeConfirmaPassword = !visibilidadeConfirmaPassword" >{{ visibilidadeConfirmaPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+                            
+                            <mat-hint *ngIf="formulario.get('passwordGroup.confirma_password').invalid && (formulario.get('passwordGroup.confirma_password').dirty || formulario.get('passwordGroup.confirma_password').touched)" >Preencha seu password novamente</mat-hint>
+                            
+                            <mat-hint *ngIf="(formulario.get('passwordGroup.confirma_password').valid) && formulario.get('passwordGroup').errors?.match">Password não corresponde</mat-hint>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </div>
+                
 
                 <mat-grid-tile colspan="2" rowspan="1">
                     <mat-card-actions>

@@ -4,6 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { UsuarioService } from './services/usuario.service';
 import { HeaderInterceptor} from './interceptors/header.interceptor';
+import { CustomValidatorsService } from './services/custom.validators.service';
 @NgModule({
   declarations: [],
   imports: [
@@ -12,7 +13,7 @@ import { HeaderInterceptor} from './interceptors/header.interceptor';
   ],
   providers:[
     UsuarioService,
-    // Desenvolver um interceptor para 
+    CustomValidatorsService,
     { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
   ]
 })
