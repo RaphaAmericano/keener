@@ -15,9 +15,9 @@ const selectProdutosNome = (nomeStr) => {
     return database.exeSqlQuery(sql, [nomeStr]);
 }
 
-const insertProduto = (nome) => {
-    const sql = `INSERT INTO PRODUTO(nome) VALUES(?)`;
-    return database.exeSqlQuery(sql, [nome]);
+const insertProduto = (nome, quantidade = 0) => {
+    const sql = `INSERT INTO PRODUTO(nome, quantidade) VALUES(?, ?)`;
+    return database.exeSqlQuery(sql, [nome, quantidade]);
 }
 
 const updateProduto = (nome, quantidade, id) => {

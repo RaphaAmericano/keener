@@ -23,9 +23,9 @@ router.get('/all', async (req, res) => {
 })
 
 router.post('/register', async (req, res) => {
-    const { nome } = req.body;
+    const { nome, quantidade } = req.body;
     try {
-        await produtos.insertProduto(nome).then(
+        await produtos.insertProduto(nome, quantidade).then(
             retorno => {
                 return res.status(201).send({ mensagem: `${nome} foi registrado com sucesso.`})
             }

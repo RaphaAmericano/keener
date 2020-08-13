@@ -31,7 +31,6 @@ router.get('/usuarios', async (req, res ) => {
 
 router.post('/register', async (req, res) => {
     const usuario = req.body;
-    console.log(usuario);
     // verifica a existencia de emails ja cadastrados        
     try {
         await usuarios.selectUsuarioEmail(usuario.email).then(
@@ -63,10 +62,10 @@ router.post('/register', async (req, res) => {
                 throw new Error({ error });
             }
         )
-        
+        delete usuario.password;
+        usuario.id_usuario = retorno.resultado.insertId;
         return res.status(201).send({ 
-            usuario: usuario,
-            retorno: retorno,
+            user: usuario,
             token: gerarToken({ id: retorno.resultado.insertId })
         });
     } catch (err){
@@ -80,15 +79,21 @@ router.post('/authenticate', async (req, res ) => {
     //busca o usuario pelo email
     try {
         await usuarios.selectUsuarioEmail(email).then(
-            resultado => user = resultado.resultado[0]
+            resultado => {
+                user = resultado.resultado[0]
+                if(user === undefined){
+                    throw new Error('Usuário não encontrado')
+                }
+            }
         ).catch(
-            error => console.warn('Error:', error)
+            error => {  throw error.message }
         );
     } catch(err) {
-        return res.status(400).send({ error: 'Usuário não encontrado'})
+        console.log(err);
+        return res.status(400).send(err)
     } 
     // verifica a senha encryptada
-    if(!await bscrypt.compare(password, user.senha )) return res.status(400).send({ error: 'Password invalido'});
+    if(!await bscrypt.compare(password, user.senha )) return res.status(400).send( 'Password invalido');
     // limpa a senha do objeto para retornar
     user.senha = undefined;
     //
