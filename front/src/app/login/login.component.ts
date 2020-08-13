@@ -28,13 +28,13 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  public cadastrar(): void {
+  public login(): void {
     if(this.formulario.valid){
       this.usuario.email = this.formulario.value.email;
       this.usuario.password = this.formulario.value.password;
+      console.log(this.usuario);
       this.authService.requisicaoAuth(this.usuario).subscribe(
         res => {
-          console.log(res);
           this.authService.guardarLocalStorage(res);
         },
         err => {

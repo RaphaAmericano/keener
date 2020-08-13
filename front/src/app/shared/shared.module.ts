@@ -11,6 +11,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { NavbarComponent } from './navbar/navbar.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -23,7 +26,9 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     MatIconModule,
     MatSnackBarModule,
-    MatTableModule
+    MatTableModule,
+    MatToolbarModule,
+    MatMenuModule
   ],
   exports: [
     CommonModule,
@@ -36,8 +41,11 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     MatIconModule,
     MatSnackBarModule,
-    MatTableModule
+    MatTableModule,
+    MatToolbarModule,
+    NavbarComponent,
+    MatMenuModule
   ],
-  declarations: []
+  declarations: [NavbarComponent]
 })
 export class SharedModule { }

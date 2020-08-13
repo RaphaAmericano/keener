@@ -14,6 +14,7 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private authService:AuthService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    if(this.authService.getStorage() == null) return next.handle(request);
     const { token } = this.authService.getStorage();
     const requestModificada = request.clone({
       setHeaders: {
