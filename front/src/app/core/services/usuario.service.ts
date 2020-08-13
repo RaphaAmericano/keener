@@ -26,6 +26,11 @@ export class UsuarioService {
     )
   }
 
+  // nao retornar observable nesse caso
+  // public buscarUsuarioId(id: number): Usuario {
+  //   return this.http.get()
+  // }
+
   private handleError(err){
     let mensagemErro = { mensagem: err };
     return throwError(mensagemErro);
