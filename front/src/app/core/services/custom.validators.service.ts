@@ -23,4 +23,12 @@ export class CustomValidatorsService {
     return { match: true }
   }
   
+  public static numeroPositivo(quantidadeControl:AbstractControl): { [key:string]: boolean } | null {
+    const quantidade = quantidadeControl.value;
+    if(Number(quantidade < 0) ){
+      return { quantidade_negativa: true }
+    } 
+    return null;
+  }
+
 }

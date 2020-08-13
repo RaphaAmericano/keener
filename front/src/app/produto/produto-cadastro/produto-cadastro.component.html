@@ -1,0 +1,48 @@
+<mat-card>
+    <img mat-card-image src="../../assets/keener_logo.png" alt="Logo Keener">
+    <mat-card-header>
+        <mat-card-title>Cadastro de Produto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-grid-list cols="2" rowHeight="6rem">
+            <form 
+            (ngSubmit)="cadastro()"
+            [formGroup]="formulario">
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nome</mat-label>
+                        <input 
+                        matInput 
+                        autocomplete="name"
+                        formControlName="nome"
+                        placeholder="Nome">
+                        <mat-icon matSuffix>shopping_cart</mat-icon>
+                        <mat-hint *ngIf="formulario.get('nome').invalid && formulario.get('nome').dirty">Nome inválido</mat-hint>
+                        <mat-hint *ngIf="formulario.get('nome').touched && !formulario.get('nome').dirty">Preencha o nome do produto</mat-hint>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Quantidade</mat-label>
+                        <input 
+                            matInput 
+                            type="number"
+                            autocomplete="off"
+                            formControlName="quantidade"
+                            placeholder="Quantidade">
+                        <mat-icon matSuffix >insert_chart</mat-icon>
+                        <mat-hint *ngIf="formulario.get('quantidade').invalid && formulario.get('quantidade').dirty">Quantidade inválida</mat-hint>
+                        <mat-hint *ngIf="formulario.get('quantidade').touched && !formulario.get('quantidade').dirty">Preencha a quantidade</mat-hint>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="2" rowspan="1">
+                    <mat-card-actions>
+                        <button mat-stroked-button type="submit" color="primary">Cadastrar</button>
+                    </mat-card-actions>
+                </mat-grid-tile>
+            </form>
+        </mat-grid-list>
+    </mat-card-content>
+</mat-card>

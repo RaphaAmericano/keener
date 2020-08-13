@@ -31,14 +31,10 @@ export class CadastroComponent implements OnInit {
   }
 
   public cadastrar(): void {
-    console.log(this.formulario.get('passwordGroup'));
     if(this.formulario.valid){
     this.usuario.email = this.formulario.value.email;
     this.usuario.name = this.formulario.value.nome;
     this.usuario.password = this.formulario.value.passwordGroup.password;
-    
-    // console.log(this.formulario);
-    // console.log(this.usuario);
 
     this.usuarioService.cadastrarUsuario(this.usuario).subscribe(
       res => console.log(res),

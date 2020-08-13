@@ -1,16 +1,16 @@
 <mat-toolbar color="primary">
     <div mat-card-avatar class="menu-logo"></div>
-    <button *ngIf="isLogged" mat-button [matMenuTriggerFor]="produto">Produto</button>
+    <button mat-button [matMenuTriggerFor]="produto">Produto</button>
     <mat-menu #produto="matMenu">
         <button mat-menu-item [routerLink]="['/produto', 'lista']">Lista</button>
-        <!-- <button mat-menu-item routerLinkActive="active" [routerLink]="['/produto', 'cadastro']">Cadastrar</button> -->
+        <button mat-menu-item routerLinkActive="active" [routerLink]="['/produto', 'cadastro']">Cadastrar</button>
     </mat-menu>
 
-    <button *ngIf="isLogged" mat-button [matMenuTriggerFor]="movimentacao">Movimentação</button>
+    <button mat-button [matMenuTriggerFor]="movimentacao">Movimentação</button>
     <mat-menu #movimentacao="matMenu">
         <!-- <button mat-menu-item routerLinkActive="active" [routerLink]="['/movimentacao', 'lista']">Lista</button> -->
         <!-- <button mat-menu-item routerLinkActive="active" [routerLink]="['/movimentacao', 'cadastro']">Cadastrar</button> -->
     </mat-menu>
     <span class="espacador"></span>
-    <button *ngIf="isLogged" mat-button class="md-warn" (click)="logout()">Logout</button>
+    <button mat-button class="md-warn" (click)="logout()">Logout</button>
 </mat-toolbar>

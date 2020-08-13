@@ -21,6 +21,12 @@ export class ProdutoService {
     )
   }
 
+  public insertProduto(produto:Produto): Observable<any> {
+    return this.http.post(`${this.API}produtos/register`, produto).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   private handleError(err){
     let mensagemErro = { mensagem: err };
     return throwError(mensagemErro);
