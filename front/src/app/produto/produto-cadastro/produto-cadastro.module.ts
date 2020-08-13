@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProdutoCadastroRoutingModule } from './produto-cadastro-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ProdutoCadastroRoutingModule.components],
   imports: [
     CommonModule,
-    ProdutoCadastroRoutingModule
+    ProdutoCadastroRoutingModule,
+    SharedModule
   ]
 })
 export class ProdutoCadastroModule { }

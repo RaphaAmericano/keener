@@ -7,7 +7,7 @@ import { ProdutoCadastroComponent } from './produto-cadastro/produto-cadastro.co
 
 
 @NgModule({
-  declarations: [ProdutoRoutingModule.components, ProdutoCadastroComponent],
+  declarations: [ProdutoRoutingModule.components],
   imports: [
     CommonModule,
     ProdutoRoutingModule,

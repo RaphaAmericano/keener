@@ -5,6 +5,10 @@ const routes: Routes = [
   {
     path:'',
     component:ProdutoCadastroComponent
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 
