@@ -10,6 +10,11 @@ const selectUsuarioEmail = (email) => {
     return database.exeSqlQuery(sql, [email]);
 }
 
+const selectUsuarioId = (id) => {
+    const sql = `SELECT * FROM USUARIO WHERE id_usuario = ?`;
+    return database.exeSqlQuery(sql, [id]);
+}
+
 const insertUsuario = (usuario) => {
     const sql = `INSERT INTO USUARIO(nome, email, senha) VALUES (?, ?, ?)`;
     return database.exeSqlQuery(sql, [usuario.name, usuario.email, usuario.password]);
@@ -25,4 +30,4 @@ const updateSenha = (password, id) => {
     return database.exeSqlQuery(sql, [password, id]);
 }
 
-module.exports = { selectAllUsuarios, insertUsuario, selectUsuarioEmail, updateUsuarioToken, updateSenha }
+module.exports = { selectAllUsuarios, insertUsuario, selectUsuarioEmail, selectUsuarioId, updateUsuarioToken, updateSenha }

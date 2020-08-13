@@ -3,7 +3,7 @@ const bscrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const mailer = require('../modules/mailer');
-
+const authMiddleware = require('../middlewares/auth');
 const authConfig = require('../config/auth');
 const router = express.Router();
 const database = require('../database/database');
@@ -15,7 +15,7 @@ const gerarToken = (parametros) => {
     } )
 }
 
-router.get('/usuarios', async (req, res ) => {
+router.get('/usuarios', authMiddleware , async (req, res ) => {
     try {
         let retorno = undefined;
         await usuarios.selectAllUsuarios().then(
@@ -27,6 +27,20 @@ router.get('/usuarios', async (req, res ) => {
     } catch(error){
         return res.status(500).send(error);
     }
+})
+
+router.get('/usuarios/:id', authMiddleware, async (req, res) => {
+    const id_usuario = req.params.id;
+    try {
+        await usuarios.selectUsuarioId(id_usuario).then(
+            resultado => res.status(200).send({resultado: resultado })
+        ).catch(
+            error => res.status(400).send({ erro: error, mensagem: 'Não foi possível recuperar o usuário.'})
+        )
+    } catch(error) {
+        return res.status(400).send({ erro: 'Ocorreu um erro ao tentar buscar o usuário.'})
+    }
+
 })
 
 router.post('/register', async (req, res) => {
