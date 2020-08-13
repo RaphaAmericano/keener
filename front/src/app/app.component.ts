@@ -9,9 +9,7 @@ import { AuthService } from './core/services/auth.service';
 export class AppComponent implements OnInit{
 
   constructor(private authService:AuthService){
-    this.authService.loginStatus.subscribe(
-      res => console.log(res)
-    );
+    this.authService.loginStatus.subscribe();
   }
 
   ngOnInit(){

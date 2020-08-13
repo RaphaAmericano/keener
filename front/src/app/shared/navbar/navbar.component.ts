@@ -9,9 +9,14 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
+  public isLogged:boolean = false;
+
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.authService.loginStatus.subscribe(
+      res => this.isLogged = res
+    )
   }
 
   public logout():void {

@@ -9,7 +9,6 @@
             <form 
             (ngSubmit)="login()"
             [formGroup]="formulario">
-
                 <mat-grid-tile colspan="1" rowspan="1">
                     <mat-form-field appearance="fill">
                         <mat-label>Email</mat-label>
@@ -40,10 +39,16 @@
 
                 <mat-grid-tile colspan="2" rowspan="1">
                     <mat-card-actions>
-                        <button mat-button type="submit" color="primary">Login</button>
+                        <button mat-stroked-button type="submit" color="primary">Login</button>
+                        <button mat-raised-button color="primary" [routerLink]="['/cadastro']">Cadastrar</button>
                     </mat-card-actions>
                 </mat-grid-tile>
-                </form>
-            </mat-grid-list>
+                <mat-grid-tile colspan="2" rowspan="1">
+                    <mat-card-actions>   
+                        <button mat-button color="primary">Esqueceu a senha?</button>
+                    </mat-card-actions>
+                </mat-grid-tile>
+            </form>
+        </mat-grid-list>
     </mat-card-content>
 </mat-card>

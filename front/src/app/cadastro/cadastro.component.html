@@ -69,13 +69,17 @@
                     </mat-grid-tile>
                 </div>
                 
-
                 <mat-grid-tile colspan="2" rowspan="1">
                     <mat-card-actions>
-                        <button mat-button type="submit" color="primary">Cadastrar</button>
+                        <button mat-stroked-button type="submit" color="primary">Cadastrar</button>
                     </mat-card-actions>
                 </mat-grid-tile>
                 </form>
+                <mat-grid-tile colspan="2" rowspan="1">
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" [routerLink]="['/login']">Login</button>
+                    </mat-card-actions>
+                </mat-grid-tile>
             </mat-grid-list>
     </mat-card-content>
 </mat-card>

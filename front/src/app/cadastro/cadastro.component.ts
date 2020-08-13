@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsuarioService } from '../core/services/usuario.service';
 import { Usuario } from '../shared/models/usuario';
 import { CustomValidatorsService } from '../core/services/custom.validators.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
@@ -16,7 +17,7 @@ export class CadastroComponent implements OnInit {
   formulario: FormGroup;
   visibilidadePassword:boolean = true;
   visibilidadeConfirmaPassword:boolean = true;
-  constructor(private formBuider: FormBuilder, private usuarioService:UsuarioService) {}
+  constructor(private formBuider: FormBuilder, private usuarioService:UsuarioService, private router:Router) {}
 
   ngOnInit(): void {
     this.formulario = this.formBuider.group({
@@ -26,7 +27,6 @@ export class CadastroComponent implements OnInit {
         password: ['', [Validators.required, Validators.minLength(3)]],
         confirma_password:['', [Validators.required, Validators.minLength(3)]]
       }, { validator: CustomValidatorsService.passwordMatch })
-      
     })
   }
 
@@ -37,13 +37,15 @@ export class CadastroComponent implements OnInit {
     this.usuario.name = this.formulario.value.nome;
     this.usuario.password = this.formulario.value.passwordGroup.password;
     
-      console.log(this.formulario);
-      console.log(this.usuario);
+    // console.log(this.formulario);
+    // console.log(this.usuario);
 
-    // this.usuarioService.cadastrarUsuario(this.usuario).subscribe(
-    //   res => console.log(res)
-    //   )
-    }
+    this.usuarioService.cadastrarUsuario(this.usuario).subscribe(
+      res => console.log(res),
+      error => console.error(error),
+      () => this.router.navigate(['/produto'])
+    )
+  }
     
   }
 

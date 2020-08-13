@@ -10,6 +10,7 @@ const routes: Routes = [
   },
   {
     path:'cadastro',
+    canActivate:[LoginGuard],
     loadChildren: () => import('./cadastro/cadastro.module').then(module => module.CadastroModule)
   },
   {
