@@ -19,6 +19,11 @@ const routes: Routes = [
     loadChildren: () => import('./produto/produto.module').then(module => module.ProdutoModule)
   },
   {
+    path: 'movimentacao',
+    canActivate:[AuthGuard],
+    loadChildren: () => import('./movimentacao/movimentacao.module').then(module => module.MovimentacaoModule)
+  },
+  {
     path:'',
     redirectTo:'login',
     pathMatch:'full'

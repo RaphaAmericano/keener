@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { LoginComponent } from './login/login.component';
 import { ProdutoComponent } from './produto/produto.component';
+import { MovimentacaoComponent } from './movimentacao/movimentacao.component';
 @NgModule({
   declarations: [
     AppComponent
