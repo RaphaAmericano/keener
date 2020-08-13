@@ -14,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FirstUppercasePipe } from './pipes/first-uppercase.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -44,8 +45,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatTableModule,
     MatToolbarModule,
     NavbarComponent,
-    MatMenuModule
+    MatMenuModule,
+    FirstUppercasePipe
   ],
-  declarations: [NavbarComponent]
+  declarations: [NavbarComponent, FirstUppercasePipe]
 })
 export class SharedModule { }

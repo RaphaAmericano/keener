@@ -32,7 +32,7 @@ export class ProdutoCadastroComponent implements OnInit {
 
   public cadastro(): void {
     if(this.formulario.valid){
-      this.produto.nome = this.formulario.value.nome; 
+      this.produto.nome = this.capitalizePrimeiraLetra(this.formulario.value.nome); 
       this.produto.quantidade = this.formulario.value.quantidade ? this.formulario.value.quantidade : 0; 
       this.produtoService.insertProduto(this.produto).subscribe(
         res => this.abrirSnackBar(res.mensagem),
@@ -50,6 +50,10 @@ export class ProdutoCadastroComponent implements OnInit {
 
   private resetarForm(): void {
     this.formulario.reset();
+  }
+
+  private capitalizePrimeiraLetra(palavra:string): string {
+    return palavra[0].toUpperCase() + palavra.substr(1).toLowerCase();
   }
 
 }
