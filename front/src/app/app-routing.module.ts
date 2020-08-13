@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './shared/guards/auth.guard';
-import { LoginGuard } from './shared/guards/login.guard';
+import { AuthGuard } from './core/guards/auth.guard';
+import { LoginGuard } from './core/guards/login.guard';
 const routes: Routes = [
   {
     path:'login',
@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path:'produto',
-    canActivateChild:[AuthGuard],
+    canActivate:[AuthGuard],
     loadChildren: () => import('./produto/produto.module').then(module => module.ProdutoModule)
   },
   {

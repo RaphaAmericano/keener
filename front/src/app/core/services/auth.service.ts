@@ -30,22 +30,23 @@ export class AuthService {
         catchError(this.handleError)
       )
   }
+  
+  public getStorage() {
+    return JSON.parse(localStorage.getItem('usuario'))
+  }
+
+  public getIsLogged(): boolean {
+    return this.isLoggedIn;
+  }
 
   public guardarLocalStorage(res): void {
     this.loginStatusSubject.next(true);
     localStorage.setItem('usuario', JSON.stringify(res));
   }
 
-  public getStorage() {
-    return JSON.parse(localStorage.getItem('usuario'))
-  }
-
   public clearStorage(): void {
-    localStorage.removeItem('usuario')
-  }
-
-  public getIsLogged(): boolean {
-    return this.isLoggedIn;
+    this.loginStatusSubject.next(false);
+    localStorage.removeItem('usuario');
   }
 
   public checagemLogin(): Promise<boolean> {
