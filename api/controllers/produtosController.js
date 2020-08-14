@@ -40,6 +40,19 @@ router.post('/register', async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res) => {
+    const id = req.params.id;
+    try { 
+        await produtos.selectProdutoId(id).then(
+            resultado => res.status(200).send({ resultado: resultado })
+        ).catch(
+            error => res.status(400).send( { erro: error, mensagem: 'Não foi possível recuperar o produto'})
+        )
+    } catch(error) {
+        return res.status(400).send({ erro: 'Ocorreu um erro ao tentar buscar o produto.'})
+    }
+})
+
 router.patch('/editar/:id', async (req, res) => {
     const { nome, quantidade } = req.body;
     const id = req.params.id;

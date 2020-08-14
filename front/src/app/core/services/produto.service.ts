@@ -27,6 +27,15 @@ export class ProdutoService {
     )
   }
 
+  public buscarProdutoId(id:number): Observable<Produto> {
+    return this.http.get(`${this.API}produtos/${id}`).pipe(
+      map( (res: { resultado:{ mensagem:string, resultado:object[]} } ) => {
+        return Object.assign(new Produto, res.resultado.resultado[0] ) }
+    ),
+      catchError(this.handleError)
+    )
+  }
+
   private handleError(err){
     let mensagemErro = { mensagem: err };
     return throwError(mensagemErro);

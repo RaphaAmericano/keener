@@ -7,7 +7,7 @@ export class Movimentacao {
     id_produto:number;
     id_usuario:number;
     quantidade:number;
-    tipo:boolean;
+    tipo:boolean | number;
     usuario:Usuario;
     produto:Produto;
     constructor(){}

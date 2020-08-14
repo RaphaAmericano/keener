@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { throwError, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap, map  } from 'rxjs/operators';
 import { Usuario } from 'src/app/shared/models/usuario';
 
 @Injectable({
@@ -25,11 +25,15 @@ export class UsuarioService {
       catchError(this.handleError)
     )
   }
-
   // nao retornar observable nesse caso
-  // public buscarUsuarioId(id: number): Usuario {
-  //   return this.http.get()
-  // }
+  public buscarUsuarioId(id: number): Observable<Usuario> {
+    return this.http.get(`${this.API}auth/usuarios/${id}`).pipe(
+      map( (res: { resultado:{ mensagem:string, resultado:object[]} } ) => {
+          return Object.assign(new Usuario, res.resultado.resultado[0] ) }
+      ),
+      catchError(this.handleError)
+    )
+  }
 
   private handleError(err){
     let mensagemErro = { mensagem: err };

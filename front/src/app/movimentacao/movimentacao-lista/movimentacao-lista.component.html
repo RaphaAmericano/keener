@@ -8,25 +8,39 @@
             <mat-label>Filtro</mat-label>
             <input matInput (keyup)="aplicarFiltro($event)" placeholder="Palavra chave" #input >
         </mat-form-field>
-        <table mat-table [dataSource]="source" matSort class="mat-elevation-z8">
+        <table 
+            mat-table 
+            [dataSource]="source" 
+            matSort 
+            matSortActive="created" 
+            matSortDisableClear 
+            matSortDirection="desc"
+            class="mat-elevation-z8">
             <ng-container matColumnDef="nome">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header><mat-icon>shopping_cart</mat-icon></th>
-                <td mat-cell *matCellDef="let movimentacao">{{ movimentacao.nome | firstUppercase }}</td>
+                <td mat-cell *matCellDef="let movimentacao">{{ movimentacao.produto?.nome  }}</td>
             </ng-container>
 
             <ng-container matColumnDef="quantidade">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header><mat-icon>perm_identity</mat-icon></th>
-                <td mat-cell *matCellDef="let movimentacao">{{ movimentacao.quantidade }}</td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header><mat-icon>insert_chart</mat-icon></th>
+                <td mat-cell *matCellDef="let movimentacao">
+                    <button 
+                    mat-mini-fab 
+                    color="{{movimentacao.tipo ? 'primary':'warn'}}" 
+                    aria-label="Quantidade da movimentação'">
+                    {{ movimentacao.quantidade  }}
+                    </button>
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="usuario">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header><mat-icon>date_range</mat-icon></th>
-                <td mat-cell *matCellDef="let movimentacao">{{ movimentacao.id_usuario }}</td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header><mat-icon>perm_identity</mat-icon></th>
+                <td mat-cell *matCellDef="let movimentacao">{{ movimentacao?.usuario?.nome   }}</td>
             </ng-container>
 
             <ng-container matColumnDef="data">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header><mat-icon>insert_chart</mat-icon></th>
-                <td mat-cell *matCellDef="let movimentacao">{{ movimentacao.horario }}</td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header><mat-icon>date_range</mat-icon></th>
+                <td mat-cell *matCellDef="let movimentacao">{{ movimentacao.horario | date:'d/M/yyyy hh:mm' }}</td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="colunas"></tr>
