@@ -52,7 +52,6 @@ export class MovimentacaoListaComponent implements OnInit {
       () => {
         this.source.data = this.movimentacoes;
         this.source.sort = this.sort;
-        console.log(this.movimentacoes)
       }
     )
   }

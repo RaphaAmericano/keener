@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
     if(this.formulario.valid){
       this.usuario.email = this.formulario.value.email;
       this.usuario.password = this.formulario.value.password;
-      console.log(this.usuario);
       this.authService.requisicaoAuth(this.usuario).subscribe(
         res => {
           this.authService.guardarLocalStorage(res);
