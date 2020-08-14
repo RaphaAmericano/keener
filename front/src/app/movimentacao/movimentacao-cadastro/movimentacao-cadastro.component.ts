@@ -36,24 +36,21 @@ export class MovimentacaoCadastroComponent implements OnInit {
       produto: ['', [Validators.required, Validators.minLength(3)]],
       quantidade: [0, [Validators.required, CustomValidatorsService.diferenteZero]]
     });
-    console.log(this.authService.getUsuarioLoggado())
   }
 
   public cadastro(): void {
     this.movimentacao = new Movimentacao();
-    console.log(this.formulario.valid)
-    console.log(this.formulario)
     this.formulario.get('produto').setValue(this.valorSelecionado);
-    console.log(this.formulario.value)
     if(this.formulario.valid){
       this.movimentacao.id_produto = this.formulario.get('produto').value;
       this.movimentacao.quantidade = this.formulario.get('quantidade').value;
+      this.movimentacao.id_usuario = this.authService.getUsuarioLoggado().id_usuario;
       this.movimentacaoService.inserirMovimentacao(this.movimentacao).subscribe(
         res => console.log(res),
         error => console.error(error),
         () => {
-          this.abrirSnackBar('teste');
           this.resetarForm();
+          this.abrirSnackBar(`Movimentação realizada com sucesso`);
         }
       )
     }

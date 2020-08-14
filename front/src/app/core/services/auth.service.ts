@@ -27,7 +27,9 @@ export class AuthService {
       res => this.isLoggedIn = res
     )
     this.usuario$.subscribe(
-      res => this.usuario = res
+      res => {
+        console.log(res);
+        this.usuario = res}
     )
   }
 
