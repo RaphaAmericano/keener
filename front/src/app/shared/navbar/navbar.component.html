@@ -9,7 +9,7 @@
     <button mat-button [matMenuTriggerFor]="movimentacao">Movimentação</button>
     <mat-menu #movimentacao="matMenu">
         <button mat-menu-item routerLinkActive="active" [routerLink]="['/movimentacao', 'lista']">Lista</button>
-        <!-- <button mat-menu-item routerLinkActive="active" [routerLink]="['/movimentacao', 'cadastro']">Cadastrar</button> -->
+        <button mat-menu-item routerLinkActive="active" [routerLink]="['/movimentacao', 'cadastro']">Cadastrar</button>
     </mat-menu>
     <span class="espacador"></span>
     <button mat-button class="md-warn" (click)="logout()">Logout</button>

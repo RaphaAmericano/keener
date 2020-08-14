@@ -31,4 +31,12 @@ export class CustomValidatorsService {
     return null;
   }
 
+  public static diferenteZero(quantidadeControl:AbstractControl): { [key:string]: boolean } | null {
+    const quantidade = quantidadeControl.value;
+    if(Number(quantidade === 0 ) || quantidade == undefined ){
+      return { quantidade_zero: true }
+    } 
+    return null;
+  }
+
 }

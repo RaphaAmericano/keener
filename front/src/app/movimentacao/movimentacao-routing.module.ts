@@ -8,6 +8,10 @@ const routes: Routes = [
     loadChildren: () => import('./movimentacao-lista/movimentacao-lista.module').then(module => module.MovimentacaoListaModule)
   },
   {
+    path:'cadastro',
+    loadChildren: () => import('./movimentacao-cadastro/movimentacao-cadastro.module').then(module => module.MovimentacaoCadastroModule)
+  },
+  {
     path:'',
     redirectTo:'lista',
     pathMatch:'full'

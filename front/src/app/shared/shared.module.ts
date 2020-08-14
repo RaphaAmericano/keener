@@ -15,6 +15,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FirstUppercasePipe } from './pipes/first-uppercase.pipe';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   imports: [
     CommonModule,
@@ -29,7 +30,8 @@ import { FirstUppercasePipe } from './pipes/first-uppercase.pipe';
     MatSnackBarModule,
     MatTableModule,
     MatToolbarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule
   ],
   exports: [
     CommonModule,
@@ -46,6 +48,7 @@ import { FirstUppercasePipe } from './pipes/first-uppercase.pipe';
     MatToolbarModule,
     NavbarComponent,
     MatMenuModule,
+    MatSelectModule,
     FirstUppercasePipe
   ],
   declarations: [NavbarComponent, FirstUppercasePipe]
