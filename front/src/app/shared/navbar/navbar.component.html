@@ -1,16 +1,21 @@
 <mat-toolbar color="primary">
     <div mat-card-avatar class="menu-logo"></div>
-    <button mat-button [matMenuTriggerFor]="produto">Produto</button>
-    <mat-menu #produto="matMenu">
-        <button mat-menu-item [routerLink]="['/produto', 'lista']">Lista</button>
-        <button mat-menu-item routerLinkActive="active" [routerLink]="['/produto', 'cadastro']">Cadastrar</button>
-    </mat-menu>
+    <div *ngIf="isLogged">
+        <button mat-button [matMenuTriggerFor]="produto">Produto</button>
+        <mat-menu #produto="matMenu">
+            <button mat-menu-item [routerLink]="['/produto', 'lista']">Lista</button>
+            <button mat-menu-item routerLinkActive="active" [routerLink]="['/produto', 'cadastro']">Cadastrar</button>
+        </mat-menu>
+    </div>
 
-    <button mat-button [matMenuTriggerFor]="movimentacao">Movimentação</button>
-    <mat-menu #movimentacao="matMenu">
-        <button mat-menu-item routerLinkActive="active" [routerLink]="['/movimentacao', 'lista']">Lista</button>
-        <button mat-menu-item routerLinkActive="active" [routerLink]="['/movimentacao', 'cadastro']">Cadastrar</button>
-    </mat-menu>
+    <div *ngIf="isLogged">
+        <button mat-button [matMenuTriggerFor]="movimentacao">Movimentação</button>
+        <mat-menu #movimentacao="matMenu">
+            <button mat-menu-item routerLinkActive="active" [routerLink]="['/movimentacao', 'lista']">Lista</button>
+            <button mat-menu-item routerLinkActive="active" [routerLink]="['/movimentacao', 'cadastro']">Cadastrar</button>
+        </mat-menu>
+    </div>
+    
     <span class="espacador"></span>
-    <button mat-button class="md-warn" (click)="logout()">Logout</button>
+    <button *ngIf="isLogged" mat-button class="md-warn" (click)="logout()">Logout</button>
 </mat-toolbar>
