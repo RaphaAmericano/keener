@@ -32,16 +32,16 @@ export class CadastroComponent implements OnInit {
 
   public cadastrar(): void {
     if(this.formulario.valid){
-    this.usuario.email = this.formulario.value.email;
-    this.usuario.name = this.formulario.value.nome;
-    this.usuario.password = this.formulario.value.passwordGroup.password;
+      this.usuario.email = this.formulario.value.email;
+      this.usuario.name = this.formulario.value.nome;
+      this.usuario.password = this.formulario.value.passwordGroup.password;
 
-    this.usuarioService.cadastrarUsuario(this.usuario).subscribe(
-      res => console.log(res),
-      error => console.error(error),
-      () => this.router.navigate(['login'])
-    )
-  }
+      this.usuarioService.cadastrarUsuario(this.usuario).subscribe(
+        res => console.log(res),
+        error => console.error(error),
+        () => this.router.navigate(['login'])
+      )
+    }
     
   }
 

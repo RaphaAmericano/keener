@@ -52,6 +52,7 @@ export class AuthService {
 
   public clearStorage(): void {
     this.loginStatusSubject.next(false);
+    this.usuarioSubject.next(new Usuario());
     localStorage.removeItem('usuario');
   }
 

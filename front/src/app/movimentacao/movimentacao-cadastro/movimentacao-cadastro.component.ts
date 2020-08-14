@@ -35,7 +35,8 @@ export class MovimentacaoCadastroComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       produto: ['', [Validators.required, Validators.minLength(3)]],
       quantidade: [0, [Validators.required, CustomValidatorsService.diferenteZero]]
-    })
+    });
+    console.log(this.authService.getUsuarioLoggado())
   }
 
   public cadastro(): void {
