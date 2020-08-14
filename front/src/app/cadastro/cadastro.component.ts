@@ -39,7 +39,7 @@ export class CadastroComponent implements OnInit {
     this.usuarioService.cadastrarUsuario(this.usuario).subscribe(
       res => console.log(res),
       error => console.error(error),
-      () => this.router.navigate(['/produto'])
+      () => this.router.navigate(['login'])
     )
   }
     

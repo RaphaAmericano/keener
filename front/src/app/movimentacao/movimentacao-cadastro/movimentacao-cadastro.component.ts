@@ -7,6 +7,7 @@ import { Produto } from 'src/app/shared/models/produto';
 import { CustomValidatorsService } from 'src/app/core/services/custom.validators.service';
 import { MovimentacaoService } from 'src/app/core/services/movimentacao.service';
 import { Movimentacao } from 'src/app/shared/models/movimentacao';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-movimentacao-cadastro',
@@ -23,6 +24,7 @@ export class MovimentacaoCadastroComponent implements OnInit {
     private formBuilder:FormBuilder, 
     private movimentacaoService:MovimentacaoService,
     private produtoService:ProdutoService,
+    private authService:AuthService,
     private _snackBar: MatSnackBar,
     private router: Router) { }
 

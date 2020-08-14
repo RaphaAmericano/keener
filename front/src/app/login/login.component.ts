@@ -36,12 +36,10 @@ export class LoginComponent implements OnInit {
       this.authService.requisicaoAuth(this.usuario).subscribe(
         res => {
           this.authService.guardarLocalStorage(res);
+          this.authService.armarzenarUsuario(res);
         },
-        err => {
-          this.abrirSnackBar(err.mensagem.error);
-        },
+        err => this.abrirSnackBar(err.mensagem.error),
         () => this.router.navigate(['/produto'])
-        // () => console.log('callback')
       )
     }
   }

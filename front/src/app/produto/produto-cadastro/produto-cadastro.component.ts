@@ -26,7 +26,6 @@ export class ProdutoCadastroComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
       quantidade: [0, CustomValidatorsService.numeroPositivo]
-      //todo: desenvolver um validador para aceitar apenas numeros positivos
     })
   }
 

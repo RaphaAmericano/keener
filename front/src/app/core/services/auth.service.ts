@@ -18,10 +18,16 @@ export class AuthService {
   public loginMudanca = this.loginMudancaSubject.asObservable();
   private loginStatusSubject:Subject<any> = new Subject<boolean>();
   public loginStatus = this.loginStatusSubject.asObservable();
+  private usuarioSubject:Subject<Usuario> = new Subject<Usuario>();
+  public usuario$ = this.usuarioSubject.asObservable();
+
 
   constructor(private http:HttpClient) { 
     this.loginStatus.subscribe(
       res => this.isLoggedIn = res
+    )
+    this.usuario$.subscribe(
+      res => this.usuario = res
     )
   }
 
@@ -64,6 +70,13 @@ export class AuthService {
     });
   }
 
+  public armarzenarUsuario(usuario): void {
+    this.usuarioSubject.next(Object.assign(new Usuario, usuario.user));
+  }
+
+  public getUsuarioLoggado(): Usuario {
+    return this.usuario;
+  }
 
   private handleError(err){
     let mensagemErro = { mensagem: err };
