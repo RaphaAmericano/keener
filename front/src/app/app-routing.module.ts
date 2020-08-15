@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { LoginGuard } from './core/guards/login.guard';
+
 const routes: Routes = [
   {
     path:'login',
@@ -12,6 +13,11 @@ const routes: Routes = [
     path:'cadastro',
     canActivate:[LoginGuard],
     loadChildren: () => import('./cadastro/cadastro.module').then(module => module.CadastroModule)
+  },
+  {
+    path:'recuperacao',
+    canActivate:[],
+    loadChildren: () => import('./recuperacao-senha/recuperacao-senha.module').then(module => module.RecuperacaoSenhaModule)
   },
   {
     path:'produto',

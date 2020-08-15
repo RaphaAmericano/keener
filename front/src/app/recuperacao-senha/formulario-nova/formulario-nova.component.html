@@ -1,0 +1,71 @@
+<mat-card>
+    <img mat-card-image src="../../assets/keener_logo.png" alt="Logo Keener">
+    <mat-card-header>
+        <mat-card-title>Nova Senha</mat-card-title>
+        <mat-card-subtitle>Registre sua nova senha</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-grid-list cols="2" rowHeight="6rem">
+            <form 
+            (ngSubmit)="novaSenha()"
+            [formGroup]="formulario">
+                <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input 
+                        matInput 
+                        autocomplete="email"
+                        formControlName="email"
+                        placeholder="Email">
+                        <mat-icon matSuffix>email</mat-icon>
+                        <mat-hint *ngIf="formulario.get('email').invalid && formulario.get('email').dirty">Email inválido</mat-hint>
+                        <mat-hint *ngIf="formulario.get('email').touched && !formulario.get('email').dirty">Preencha seu email</mat-hint>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <div formGroupName="passwordGroup">
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Nova Senha</mat-label>
+                            <input 
+                                matInput 
+                                [type]="visibilidadePassword ? 'password': 'text' "
+                                formControlName="password"
+                                placeholder="Nova Senha">
+                            <mat-icon matSuffix (click)="visibilidadePassword = !visibilidadePassword" >{{ visibilidadePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+                            <mat-hint *ngIf="formulario.get('passwordGroup.password').invalid && formulario.get('passwordGroup.password').dirty">Password inválido</mat-hint>
+                            <mat-hint *ngIf="formulario.get('passwordGroup.password').touched && !formulario.get('passwordGroup.password').dirty">Preencha seu password</mat-hint>
+                        </mat-form-field>
+                    </mat-grid-tile>
+    
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Confirmar Nova Senha</mat-label>
+                            <input 
+                                matInput 
+                                [type]="visibilidadeConfirmaPassword ? 'password': 'text' "
+                                formControlName="confirma_password"
+                                placeholder="Nova Senha">
+                            <mat-icon matSuffix (click)="visibilidadeConfirmaPassword = !visibilidadeConfirmaPassword" >{{ visibilidadeConfirmaPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+                            
+                            <mat-hint *ngIf="formulario.get('passwordGroup.confirma_password').invalid && (formulario.get('passwordGroup.confirma_password').dirty || formulario.get('passwordGroup.confirma_password').touched)" >Preencha seu password novamente</mat-hint>
+                            
+                            <mat-hint *ngIf="(formulario.get('passwordGroup.confirma_password').valid) && formulario.get('passwordGroup').errors?.match">Password não corresponde</mat-hint>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </div>
+                
+                <mat-grid-tile colspan="2" rowspan="1">
+                    <mat-card-actions>
+                        <button mat-stroked-button type="submit" color="primary">Nova Senha</button>
+                    </mat-card-actions>
+                </mat-grid-tile>
+                </form>
+                <mat-grid-tile colspan="2" rowspan="1">
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" [routerLink]="['/login']">Login</button>
+                    </mat-card-actions>
+                </mat-grid-tile>
+            </mat-grid-list>
+    </mat-card-content>
+</mat-card>

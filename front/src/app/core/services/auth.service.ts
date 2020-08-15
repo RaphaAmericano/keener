@@ -37,6 +37,19 @@ export class AuthService {
       )
   }
   
+  public emailRecuperacao(email): Observable<any> {
+    return this.http.post(`${this.API}auth/forgot_password`, email).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  public resetSenha(usuario): Observable<any> {
+    return this.http.post(`${this.API}auth/reset_password`, usuario).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+
   public getStorage() {
     return JSON.parse(localStorage.getItem('usuario'))
   }

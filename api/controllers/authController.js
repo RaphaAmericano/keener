@@ -9,6 +9,7 @@ const router = express.Router();
 const database = require('../database/database');
 const usuarios = require('../models/usuarios');
 
+
 const gerarToken = (parametros) => {
     return jwt.sign( parametros ,  authConfig.secret, {
         expiresIn: 86400
@@ -115,7 +116,9 @@ router.post('/authenticate', async (req, res ) => {
 });
 
 router.post('/forgot_password', async (req, res) => {
+    console.log(req.body)
     const { email } = req.body;
+    const urlPath = 'http://localhost:4200/';
     let user = undefined;
    
     try {
@@ -141,7 +144,7 @@ router.post('/forgot_password', async (req, res) => {
                     from: 'raphael@raphaelamericano.com.br',
                     subject: 'Alteração de senha',
                     template:'forgot_password',
-                    context: { token }
+                    context: { urlPath, token }
                 },(err, resultados) => {
                     if(err)
                     {  

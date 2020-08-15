@@ -20,12 +20,10 @@ export class AppComponent implements OnInit{
           this.authService.armarzenarUsuario(this.authService.getStorage())
         } else {
           this.authService.clearStorage();
-          this.router.navigate(['login']);
         }
       },
       rej => {
         this.authService.clearStorage();
-        this.router.navigate(['login']);
       }      
     )
   }
