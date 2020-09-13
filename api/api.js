@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const routes = require('./routes');
+require('./database/index');
 const app = express();
 
 app.use(bodyParser.json());
@@ -11,13 +13,14 @@ const corsOptions = {
     optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions));
+app.use(routes);
 
-require('./controllers/authController')(app);
-require('./controllers/produtosController')(app);
-require('./controllers/movimentacoesController')(app);
+// require('./controllers/authController')(app);
+// require('./controllers/produtosController')(app);
+// require('./controllers/movimentacoesController')(app);
 
-app.get('/', (req, res) => {
-    res.send('OK')
-})  
+
+
+ 
 
 app.listen(3000);
