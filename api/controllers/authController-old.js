@@ -141,10 +141,10 @@ const gerarToken = (parametros) => {
 //             resultado => {
 //                 mailer.sendMail({
 //                     to: email,
-//                     from: 'raphael@raphaelamericano.com.br',
-//                     subject: 'Alteração de senha',
-//                     template:'forgot_password',
-//                     context: { urlPath, token }
+                    // from: 'raphael@raphaelamericano.com.br',
+                    // subject: 'Alteração de senha',
+                    // template:'forgot_password',
+                    // context: { urlPath, token }
 //                 },(err, resultados) => {
 //                     if(err)
 //                     {  

@@ -24,7 +24,7 @@ module.exports = {
 
         return res.status(200).json(usuario);
     },
-    async forgotPassword(req, res){
+    async forgotSenha(req, res){
         const { email } = req.body;
         const urlPath = `http://localhost:4200`;
         const usuario = await Usuario.findOne({
@@ -64,6 +64,40 @@ module.exports = {
         ).catch(
             error => res.status(400).json({ error: 'Não foi possível atualizar o token' }) 
         );
+    },
+    async resetSenha(req, res){
+        const { email, token, senha } = req.body;
+        const usuario = await Usuario.findOne({
+            where: {
+                email
+            }
+        });
+        if(!usuario){
+            return res.status(404).json({error: 'Email não enviado'});
+        }
+        if(token !== usuario.token){
+            return res.status(400).json({ error: 'Token inválido' });
+        }
+
+        const agora = new Date();
+        if( agora > usuario.token_expires){
+            return res.status(400).send({ error: 'Token expirado'});
+        }
+
+        const hash = await bcryptjs.hash(senha, 10);
+
+        await Usuario.update({ senha: hash }, {
+            where: {
+                email
+            }
+        }).then(
+            resultado => res.status(204).json({ mensagem: 'A senha foi atualizada com sucesso.'})
+        ).catch(
+            error => {
+                console.log(error);
+                return res.status(400).json({error: 'Não foi possível alterar a senha'})
+            }
+        )
 
     }
 }

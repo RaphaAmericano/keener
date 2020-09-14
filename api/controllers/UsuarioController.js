@@ -10,12 +10,11 @@ module.exports = {
         const { id } = req.params;
         const usuario = await Usuario.findByPk(id);
         if(!usuario){
-            return res.status(404).json({error: 'Usuário não existe'});    
+            return res.status(404).json({ error: 'Usuário não existe'});    
         } 
         return res.status(200).json(usuario);
     },
     async store(req, res) {
-        
         const { nome, email, senha } = req.body;
         const existEmail =  await Usuario.findOne({
             where: {
@@ -26,8 +25,8 @@ module.exports = {
         if(existEmail != null){
             return res.status(409).json({ error: `O email ${email} já está cadastrado.`})
         };
-        const hash = await bcryptjs.hash(senha, 10 );
-        const usuario = await Usuario.create({nome, email, senha:hash });
+        // const hash = await bcryptjs.hash(senha, 10 );
+        const usuario = await Usuario.create({nome, email, senha });
         const token = await TokenUtils.gerarToken({ id: usuario.id});
         return res.status(201).json({usuario, token});
     },
