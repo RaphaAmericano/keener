@@ -37,10 +37,13 @@ module.exports = {
         type:Sequelize.BOOLEAN,
         allowNull: false
       },
-      horario:{
+      created_at: {
         type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        allowNull: false
+      },
+      updated_at: {
+       type: Sequelize.DATE,
+       allowNull: false
       }
     });
      

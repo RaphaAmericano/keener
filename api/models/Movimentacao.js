@@ -6,6 +6,7 @@ class Movimentacao extends Model {
             id_usuario: DataTypes.INTEGER,
             id_produto: DataTypes.INTEGER,
             quantidade: DataTypes.INTEGER,
+            tipo: DataTypes.BOOLEAN
         }, {
             sequelize: connection
         })
