@@ -15,13 +15,13 @@ export class UsuarioService {
   constructor(private http:HttpClient) {}
 
   public buscarTodosUsuarios(): Observable<any> {
-    return this.http.get(`${this.API}auth/usuarios`).pipe(
+    return this.http.get(`${this.API}usuarios`).pipe(
       catchError(this.handleError)
     )
   }
 
   public cadastrarUsuario(usuario: Usuario): Observable<any> {
-    return this.http.post(`${this.API}auth/register`, usuario).pipe(
+    return this.http.post(`${this.API}usuarios/novo`, usuario).pipe(
       catchError(this.handleError)
     )
   }

@@ -11,7 +11,7 @@ import { AuthService } from '../core/services/auth.service';
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.scss']
 })
-// export class CadastroComponent implements OnInit, MatFormFieldControl<FormularioUsuario> {
+
 export class CadastroComponent implements OnInit {
 
   usuario:Usuario = new Usuario();

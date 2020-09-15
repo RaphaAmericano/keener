@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+    db:
+        image: mysql:5.7
+        container_name: db
+        restart: always
+        command: --default-authentication-plugin=mysql_native_password
+        env_file:
+            - ./.env
+        environment: 
+            - MYSQL_DATABASE=estoque
+            - MYSQL_USER=admin
+            - MYSQL_PASSWORD=senha
+            - MYSQL_ROOT_PASSWORD=outrasenha
+        ports:
+            - "3306:3306"
+        expose: 
+            - "3306"
+        volumes:
+            - type: volume
+              target: /var/lib/mysql
+              source: mysql_database 
+        networks:
+            - keener-app-network
+    api-node:
+        image: node:alpine
+        container_name: api
+        env_file: 
+            - ./.env
+        ports:
+            - "${NODE_PORT}:${NODE_PORT}"
+        volumes:
+            - type: bind
+              target: /home/keener/api
+              source: ./api
+        working_dir: /home/keener/api
+        networks:
+            - keener-app-network
+        command: >
+            sh -c "ls && node api.js"
+volumes: 
+    mysql_database:
+networks: 
+    keener-app-network:
+        driver: bridge

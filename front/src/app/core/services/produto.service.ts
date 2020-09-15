@@ -15,7 +15,7 @@ export class ProdutoService {
   constructor(private http: HttpClient) { }
 
   public buscarTodosProdutos(): Observable<Produto[]> {
-    return this.http.get(`${this.API}produtos/all`).pipe(
+    return this.http.get(`${this.API}produtos`).pipe(
       map((res:{ produtos: { mensagem: string, resultado: any[]}})  => res.produtos.resultado),
       catchError(this.handleError)
     )
