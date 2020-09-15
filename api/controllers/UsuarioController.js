@@ -25,7 +25,6 @@ module.exports = {
         if(existEmail != null){
             return res.status(409).json({ error: `O email ${email} já está cadastrado.`})
         };
-        // const hash = await bcryptjs.hash(senha, 10 );
         const usuario = await Usuario.create({nome, email, senha });
         const token = await TokenUtils.gerarToken({ id: usuario.id});
         return res.status(201).json({usuario, token});
